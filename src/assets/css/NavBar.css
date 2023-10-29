@@ -1,0 +1,29 @@
+.contenedor {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background-color: aqua;
+}
+.titulo {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 0px;
+  }
+.imgInicio{
+    width: 50px;
+    height: auto;
+   
+}
+.carro {
+    width: 36px;
+    
+  }
+
+.botones{
+    display: flex;
+    gap: 15px;
+
+}
