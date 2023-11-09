@@ -8,7 +8,7 @@ export default function Reducer(state, action) {
   switch (type) {
 
     case LISTAME_PRODUCTOS:
-      console.log(payload);
+      console.log("listame_productos", payload);
       return { ...state, products : payload };
       case AGREGAR_CARRITO:
         const productoAgregado = state.products.find((item) => item.id === parseInt(payload));
