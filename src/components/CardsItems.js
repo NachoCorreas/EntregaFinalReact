@@ -1,25 +1,24 @@
-import React, { useContext } from 'react'
+import React, { useContext } from 'react';
+import "../assets/css/CardItems.css";
+import Contexto from '../context/Contexto';
 
-import "../assets/css/CardItems.css"
-import Contexto from '../context/Contexto'
 export default function CardsItems(props) {
-    // const { nombre, precio, foto, talle, id } = props;
     const { products, agregarCarrito } = useContext(Contexto);
+
+    // Puedes obtener el ID del producto que quieres mostrar desde las props
     
-    
-//   console.log("Datos en CardItems:", { products });
-  
-//   const producto = products.find((item) => item.id == products.id);
-const producto = products.map((elem)=>({...elem}))
-  
+    const productId = props.id;
 
+    // Encuentra el producto en base al ID
+    const producto = products.find((item) => item.id === productId);
 
-
-  console.log("Producto encontrado:", producto);
-
+    if (!producto) {
+        // Manejar el caso en el que el producto no se encuentre
+        return null;
+    }
+console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAA",producto);
     return (
         <>
-
             <div className="home-item">
                 <img src={producto.foto} alt="" className="home-item-img" />
                 <div className="home-item-info">
@@ -30,17 +29,14 @@ const producto = products.map((elem)=>({...elem}))
                         <button
                             className="home-item-comprar"
                             onClick={() => {
-                                console.log("Agregando al carrito:", producto.nombre);
-                                agregarCarrito(producto.nombre);
+                                agregarCarrito(producto);
                             }}
                         >
                             +
                         </button>
-
                     </div>
                 </div>
             </div>
-        </>
-    );
-    
+        </>
+    );
 }

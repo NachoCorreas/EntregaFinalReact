@@ -1,14 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import CardsItems from '../components/CardsItems'
+import Contexto from '../context/Contexto'
+
 
 export default function Zapatillas(props) {
-
+const {products} = useContext(Contexto)
+   
   return (
-    <>
-    <CardsItems 
-  
-  ></CardsItems> 
-
-    </>
+    <div className='zapas-container'>
+      {products.map((producto)=> (
+        <CardsItems key={producto.id} id={producto.id}/>
+      ))
+      }
+    </div>
   )
 }
