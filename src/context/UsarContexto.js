@@ -1,4 +1,3 @@
-// import axios from "axios";
 
 import { collection, getDocs} from "firebase/firestore";
 import Contexto from "./Contexto";
@@ -40,18 +39,13 @@ export default function UsarContexto(props) {
       });
   };
   
-  // ...
-  
-  
-  
-  // ...
   
   console.log("Estado después de listameProductos:", state.products);
   
   
 useEffect(() => {
   listameProductos();
-}, []); // Asegúrate de proporcionar las dependencias correctas si es necesario
+}, []); 
 
 
   

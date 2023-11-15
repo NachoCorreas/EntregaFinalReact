@@ -11,7 +11,7 @@ export default function Reducer(state, action) {
       console.log("listame_productos", payload);
       return { ...state, products : payload };
       case AGREGAR_CARRITO:
-        const productoAgregado = state.products.find((item) => item.id === parseInt(payload));
+        const productoAgregado = state.products.find((item) => item.id == parseInt(payload));
         return {
           ...state,
           carrito: [...state.carrito, productoAgregado],
@@ -19,9 +19,10 @@ export default function Reducer(state, action) {
       
 
         case ELIMINAR_CARRITO:
-            return {
-              ...state,
-              carrito: state.carrito.map((item) => item.id !== payload),
-            };
+          return {
+            ...state,
+            carrito: state.carrito.filter((item) => item.id !== payload),
+          };
+        
   }
 }

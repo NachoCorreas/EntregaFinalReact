@@ -4,19 +4,13 @@ import Contexto from '../context/Contexto';
 
 export default function CardsItems(props) {
     const { products, agregarCarrito } = useContext(Contexto);
-
-    // Puedes obtener el ID del producto que quieres mostrar desde las props
-    
     const productId = props.id;
-
-    // Encuentra el producto en base al ID
     const producto = products.find((item) => item.id === productId);
 
     if (!producto) {
-        // Manejar el caso en el que el producto no se encuentre
         return null;
     }
-console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAA",producto);
+// console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAA",producto);
     return (
         <>
             <div className="home-item">
@@ -29,7 +23,7 @@ console.log("ACAAAAAAAAAAAAAAAAAAAAAAAAAA",producto);
                         <button
                             className="home-item-comprar"
                             onClick={() => {
-                                agregarCarrito(producto);
+                                agregarCarrito(producto.id);
                             }}
                         >
                             +
