@@ -1,81 +1,80 @@
+// UsarContexto.js
 
-import { collection, getDocs} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import Contexto from "./Contexto";
-import { useReducer , useEffect, useState} from "react";
-import Reducer from "./Reducer";
+import { useEffect, useState } from "react";
 import { db } from "../routes/App";
-
 
 export default function UsarContexto(props) {
   const { children } = props;
-  const carritoInicial = JSON.parse(localStorage.getItem("carrito")) || []
-  const estadoInicial = {
-    products: [],
-    carrito: [],
+  const carritoInicial = JSON.parse(localStorage.getItem("carrito")) || [];
+  const [products, setProducts] = useState([]);
+  const [carrito, setCarrito] = useState(carritoInicial);
+
+  const agregarCarrito = (item, cantidad) => {
+    const repetido = carrito.findIndex((product) => product.id === item.id)
+   if (repetido !== -1){
+    const agregaItem = [...carrito]
+    agregaItem[repetido].cantidad += 1;
+    setCarrito(agregaItem);
+   }else{
+    setCarrito((prevCarrito) => [...prevCarrito, { ...item, cantidad: 1 }]);
+   }
   };
 
-// const [cantCarrito, setCantCarrito] = useState(carritoInicial)
-// const sumarCarro = (item,cantidad) => {
-//   const itemSuma = {...item,cantidad}
-//   const nuevoCant = [...cantCarrito]
-//   const sumaCarro = nuevoCant.find((prod) => prod.id === itemSuma.id)
+  // const eliminarCarrito = (item) => {
+  //   setCarrito((prevCarrito) =>
+  //     prevCarrito.filter((product) => product.id !== item.id)
+  //   );
+  // };
 
-//   if (sumaCarro){
-//     sumaCarro.cantidad += cantidad
-//   }
-//   else{
-//     nuevoCant.push({...item})
-//   }
-//   setCantCarrito(nuevoCant)
-// }
-  const [state, dispatch] = useReducer(Reducer, estadoInicial);
-
-  const agregarCarrito = (item) => {
-    console.log("Agregamos a carrito", item);
-    dispatch({ type: "AGREGAR_CARRITO", payload: item });
-  };
   const eliminarCarrito = (item) => {
-    console.log("Eliminar carrito", item);
-    dispatch({ type: "ELIMINAR_CARRITO", payload: item });
+    const existenteIndex = carrito.findIndex((producto) => producto.id === item.id);
+    if (existenteIndex !== -1) {
+      const nuevoCarrito = [...carrito];
+      if (nuevoCarrito[existenteIndex].cantidad > 1) {
+        nuevoCarrito[existenteIndex].cantidad -= 1;
+      } else {
+        nuevoCarrito.splice(existenteIndex, 1);
+      }
+      setCarrito(nuevoCarrito);
+    }
   };
 
-   
+  const vaciarCarrito = () =>{
+    setCarrito([])
+  }
 
   const listameProductos = () => {
     const itemCollection = collection(db, "EntregaFinal");
     getDocs(itemCollection)
       .then((res) => {
         let item = res.docs.map((elem) => ({ ...elem.data() }));
-        console.log("Data de Firebase:", item);
-        dispatch({ type: "LISTAME_PRODUCTOS", payload: item });
+        setProducts(item);
       })
       .catch((error) => {
         console.error("Error al obtener datos de Firebase:", error);
       });
   };
-  
-  
-  console.log("Estado después de listameProductos:", state.products);
-  
-  
-useEffect(() => {
-  listameProductos();
-}, []); 
 
+  useEffect(() => {
+    listameProductos();
+  }, []);
 
-  
-  
+  useEffect(() => {
+    // Actualizar el localStorage cuando cambia el carrito
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+  }, [carrito]);
 
-   
   return (
     <Contexto.Provider
       value={{
-        products: state.products,
-        carrito: state.carrito,
+        products,
+        carrito,
         listameProductos,
         agregarCarrito,
         eliminarCarrito,
-       
+        vaciarCarrito,
       }}
     >
       {children}

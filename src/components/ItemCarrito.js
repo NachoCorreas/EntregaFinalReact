@@ -1,12 +1,17 @@
-import React from "react";
+import React , { useContext }from "react";
 import "../assets/css/ItemCarrito.css";
 import Borrar from "../assets/static/borrar.png";
+import Contexto from "../context/Contexto";
+
+
 export default function ItemCarrito(props) {
-  const { nombre, precio, foto, id , talle , } = props;
+  const { eliminarCarrito } = useContext(Contexto);
+  const { nombre, precio, foto, id , talle , cantidad } = props;
   
-  console.log(props, "como vienen al item carrito");
+  
+  // console.log(props, "como vienen al item carrito");
   const handleBorrar = () => {
-    props.eliminarCarrito( id );
+    eliminarCarrito( props );
   };
 
   return (
@@ -15,8 +20,9 @@ export default function ItemCarrito(props) {
         <img src={foto} alt="" className="carrito-item-img" />
         <div className="carrito-txt">
           <h1 className="carrito-item-titulo">{nombre}</h1>
-          <h1 className="carrito-item-titulo">{talle}</h1>
-          <h3 className="carrito-item-precio">AR${precio}</h3>
+          <h4 className="carrito-item-titulo">Cantidad: {cantidad}</h4>
+          <h1 className="carrito-item-titulo">Talle: {talle}</h1>
+          <h3 className="carrito-item-precio">AR${precio * cantidad}</h3>
         </div>
 
         <img

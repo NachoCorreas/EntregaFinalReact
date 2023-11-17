@@ -1,0 +1,39 @@
+.modal-overlay {
+    position: center;
+   margin-left: 25%;
+   margin-bottom: 100%;
+    width: 50%;
+    height: 50%;
+    background: orangered !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background: orangered;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+  }
+  
+  .mensaje-estilo-80s {
+    font-size: 24px;
+    color: #000000; /* Rosa brillante */
+  }
+  
+  .boton-cerrar-estilo-80s {
+    background: #ff3300; /* Azul brillante */
+    color: #050505;
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+  }
+  
+  .boton-cerrar-estilo-80s:hover {
+    background: #ff3300; /* Naranja brillante */
+  }
+  

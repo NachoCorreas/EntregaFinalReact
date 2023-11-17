@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext }from 'react'
 import Boton from './Boton'
 import imgInicio from "../assets/static/retroPicBasquet.jpg"
 
 import "../assets/css/NavBar.css"
 import { Link } from 'react-router-dom'
 import CarroItem from './CarroItem'
-export default function NavBar() {
+import Contexto from '../context/Contexto';
 
+export default function NavBar() {
+    const { carrito } = useContext(Contexto);
+    const cantidadTotal = carrito.reduce((total, producto) => total + producto.cantidad, 0);
     return (
         <>
             <div className='contenedor'>
@@ -16,7 +19,7 @@ export default function NavBar() {
                     Basquet Store
                 </h1>
                 <Boton></Boton>
-                <CarroItem></CarroItem>
+                <CarroItem cantidad={cantidadTotal}></CarroItem>
 
 
             </div>

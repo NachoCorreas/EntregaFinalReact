@@ -23,7 +23,7 @@ export default function CardsItems(props) {
                         <button
                             className="home-item-comprar"
                             onClick={() => {
-                                agregarCarrito(producto.id);
+                                agregarCarrito(producto);
                             }}
                         >
                             +
