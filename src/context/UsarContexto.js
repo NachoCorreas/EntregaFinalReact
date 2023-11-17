@@ -1,18 +1,33 @@
 
 import { collection, getDocs} from "firebase/firestore";
 import Contexto from "./Contexto";
-import { useReducer , useEffect, useContext} from "react";
+import { useReducer , useEffect, useState} from "react";
 import Reducer from "./Reducer";
 import { db } from "../routes/App";
 
 
 export default function UsarContexto(props) {
   const { children } = props;
-
+  const carritoInicial = JSON.parse(localStorage.getItem("carrito")) || []
   const estadoInicial = {
     products: [],
     carrito: [],
   };
+
+// const [cantCarrito, setCantCarrito] = useState(carritoInicial)
+// const sumarCarro = (item,cantidad) => {
+//   const itemSuma = {...item,cantidad}
+//   const nuevoCant = [...cantCarrito]
+//   const sumaCarro = nuevoCant.find((prod) => prod.id === itemSuma.id)
+
+//   if (sumaCarro){
+//     sumaCarro.cantidad += cantidad
+//   }
+//   else{
+//     nuevoCant.push({...item})
+//   }
+//   setCantCarrito(nuevoCant)
+// }
   const [state, dispatch] = useReducer(Reducer, estadoInicial);
 
   const agregarCarrito = (item) => {
@@ -60,6 +75,7 @@ useEffect(() => {
         listameProductos,
         agregarCarrito,
         eliminarCarrito,
+       
       }}
     >
       {children}
