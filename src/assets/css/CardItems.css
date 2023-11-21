@@ -12,12 +12,13 @@
 }
 
 .home-item {
-  width: 20%; /* Ancho de cada tarjeta */
+  width: 15%; /* Ancho de cada tarjeta */
   background-color: #f0f0f0; /* Color de fondo */
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+  margin: 10px;
 }
 
 .home-item:hover {

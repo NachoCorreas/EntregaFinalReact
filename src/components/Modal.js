@@ -7,7 +7,7 @@ const Modal = ({ mostrar, cerrarModal }) => {
       {mostrar && (
         <div className="modal-overlay modal-estilo-80s">
           <div className="modal-content">
-            <p className="mensaje-estilo-80s">¡Gracias por su compra!</p>
+            <p className="mensaje-estilo-80s">¡ Gracias por su compra Profe !</p>
             
           </div>
         </div>
