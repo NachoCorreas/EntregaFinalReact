@@ -9,7 +9,7 @@ import imgZapa from "../assets/static/ConverseOfficialShoes.jpg"
 export default function Home() {
   return (
    <>
-   <Container className='contenedorHome'>
+   <div className='contenedorHome'>
     <Row className='row1 text-center '>
       <Col className='titulo text-center'><h2>Bienvenido a tu mundo RETRO</h2></Col>
       <Col><img className='imgHome img-fluid img-thumbnail' src={imgHome} alt="promo" /></Col>
@@ -21,7 +21,7 @@ export default function Home() {
       <p>Encontraras una amplia variedad de zapatillas, ropa y accesorios para todos los estilos retro que te imagines</p>
     </Col>
     </Row>
-  </Container>
+  </div>
    </> 
   )
 }
